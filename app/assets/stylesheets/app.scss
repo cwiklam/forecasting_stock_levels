@@ -22,6 +22,12 @@ body {
   justify-content: flex-end;
 }
 
+.flex-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .navbar-margin-bottom {
   margin-bottom: 50px;
 }
@@ -56,5 +62,18 @@ input:focus {
 .form-container {
   padding: 30px 15px 0 0;
   background-color: #394047;
+  border-radius: 10px;
+}
+
+.btn-link {
+  color: #ddd;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.btn-link:hover {
+  color: #eee;
+  background-color: rgb(256,256,256,0.05);
+  text-decoration: none;
   border-radius: 10px;
 }

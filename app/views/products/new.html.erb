@@ -2,6 +2,11 @@
   <%= simple_form_for @product do |f| %>
     <div class="container">
       <div class="row flex-center">
+        <div class="col-10 flex-left button-margin-vertical">
+          <%= link_to 'Wróć do listy produktów', products_path, class: 'btn btn-link button-margin-vertical' %>
+        </div>
+      </div>
+      <div class="row flex-center">
         <div class="col-4 flex-column-center input form-container">
           <div class="mb-4">
             <h4>Dodawanie nowego produktu</h4>
