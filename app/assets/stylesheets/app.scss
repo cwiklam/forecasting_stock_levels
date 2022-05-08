@@ -16,10 +16,45 @@ body {
   flex-direction: column;
 }
 
+.flex-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .navbar-margin-bottom {
   margin-bottom: 50px;
 }
 
 .min-width {
   width: min-content !important;
+}
+
+.button-margin-vertical {
+  margin: 10px 0;
+}
+
+.dark-input {
+  background-color: #2a2a2f;
+  color: #ddd;
+  height: 40px;
+  border: solid #6a6a6f 2px;
+}
+
+.dark-input {
+  background-color: #2a2a2f;
+  color: #ddd;
+  height: 40px;
+  border: solid #6a6a6f 2px;
+}
+
+input:focus {
+  border: solid #aaaaaf 3px !important;
+  box-shadow: none;
+}
+
+.form-container {
+  padding: 30px 15px 0 0;
+  background-color: #394047;
+  border-radius: 10px;
 }

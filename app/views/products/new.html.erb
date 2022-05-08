@@ -1,0 +1,36 @@
+<div class="container">
+  <%= simple_form_for @product do |f| %>
+    <div class="container">
+      <div class="row flex-center">
+        <div class="col-4 flex-column-center input form-container">
+          <div class="mb-4">
+            <h4>Dodawanie nowego produktu</h4>
+          </div>
+          <div class="mb-4">
+            <label for="exampleFormControlInput1" class="form-label">Nazwa</label>
+            <%= f.input :name, input_html: { class: 'dark-input', id: 'form-name' }, placeholder: 'nazwa', label: false %>
+          </div>
+          <div class="mb-4">
+            <label for="exampleFormControlInput1" class="form-label">Symbol</label>
+            <%= f.input :symbol, input_html: { class: 'dark-input', id: 'form-symbol' }, placeholder: 'symbol', label: false %>
+          </div>
+          <div class="mb-4">
+            <label for="exampleFormControlInput1" class="form-label">Cena</label>
+            <%= f.input :price, as: :integer, input_html: { class: 'dark-input', id: 'form-price' }, placeholder: 'price', label: false %>
+          </div>
+          <div class="mb-4">
+            <label for="exampleFormControlInput1" class="form-label">Ilość</label>
+            <%= f.input :availability, as: :integer, input_html: { class: 'dark-input', id: 'form-availability' }, placeholder: 'availability', label: false %>
+          </div>
+          <div class="mb-4">
+            <label for="exampleFormControlInput1" class="form-label">Maksymalna ilość na magazynie</label>
+            <%= f.input :max, as: :integer, input_html: { class: 'dark-input', id: 'form-max' }, placeholder: 'max', label: false %>
+          </div>
+          <div class="mb-4">
+            <%= f.submit 'Dodaj', class: 'btn btn-secondary button-margin-vertical' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
