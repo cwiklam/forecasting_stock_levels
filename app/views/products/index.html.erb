@@ -1,9 +1,22 @@
-<h1>Welcome, this is the home page</h1>
-
-<button type="button"
-        class="btn btn-lg btn-danger"
-        data-bs-toggle="popover"
-        title="Popover title"
-        data-bs-content="Amazing content, right ?">
-  Click to toggle popover
-</button>
+<div class="container flex-column-center">
+  <table class="table table-dark table-striped">
+    <thead>
+    <tr class="table-dark">
+      <th class="table-dark" scope="col">ID</th>
+      <th class="table-dark" scope="col">Nazwa</th>
+      <th class="table-dark" scope="col">Dostępność</th>
+      <th class="table-dark" scope="col">Cena</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <tr class="table-dark">
+        <th scope="row"><%= product.id %></th>
+        <td class="table-dark"><%= product.name %></td>
+        <td class="table-dark"><%= product.availability %></td>
+        <td class="table-dark"><%= product.price %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

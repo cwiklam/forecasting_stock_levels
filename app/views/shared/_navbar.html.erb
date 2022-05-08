@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-margin-bottom">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to 'Strona główna', root_path, class: "nav-link#{' active' if request.path == root_path}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Produkty', products_path, class: "nav-link#{' active' if request.path == products_path}" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

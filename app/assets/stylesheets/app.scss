@@ -1,0 +1,25 @@
+body {
+  color: #ddd;
+  background-color: #495057;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-column-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.navbar-margin-bottom {
+  margin-bottom: 50px;
+}
+
+.min-width {
+  width: min-content !important;
+}
