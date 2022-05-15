@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col flex-right">
+      <%= link_to 'Dodaj nowy', new_order_path, class: 'btn btn-secondary button-margin-vertical' %>
+    </div>
+  </div>
+</div>
+<div class="container flex-column-center">
+  <table class="table table-dark table-striped">
+    <thead>
+    <tr class="table-dark">
+      <th class="table-dark" scope="col">Numer zamówienia</th>
+      <th class="table-dark" scope="col">Cena</th>
+      <th class="table-dark" scope="col">Data zamówienia</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @orders.each do |order| %>
+      <tr class="table-dark">
+        <th scope="row"><%= order.order_number %></th>
+        <td class="table-dark"><%= order.price %></td>
+        <td class="table-dark"><%= year_month_date(order.created_at) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

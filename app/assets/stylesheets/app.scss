@@ -36,8 +36,16 @@ body {
   width: min-content !important;
 }
 
+.full-width {
+  width: 100%;
+}
+
 .button-margin-vertical {
   margin: 10px 0;
+}
+
+.small-margin-lr {
+  margin: 0 10px;
 }
 
 .dark-input {
@@ -76,4 +84,8 @@ input:focus {
   background-color: rgb(256,256,256,0.05);
   text-decoration: none;
   border-radius: 10px;
+}
+
+.hidden {
+  display: none;
 }

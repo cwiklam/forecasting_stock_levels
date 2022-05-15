@@ -1,0 +1,55 @@
+<div class="container" data-controller="order-form">
+  <%= simple_form_for @order do |f| %>
+    <div class="container">
+      <div class="row flex-center">
+        <div class="col-10 flex-left button-margin-vertical">
+          <%= link_to 'Wróć do listy zamówień', orders_path, class: 'btn btn-link button-margin-vertical' %>
+        </div>
+      </div>
+      <div class="row flex-center">
+        <div class="col-6 flex-column-center input form-container">
+          <div class="mb-4">
+            <h4>Składanie nowego zamówienia</h4>
+          </div>
+          <%= f.simple_fields_for :product_orders, ProductOrder.new do |po| %>
+            <div class="mb-4 flex-left full-width">
+              <div class="small-margin-lr">
+                <label for="exampleFormControlInput1" class="form-label">Wybierz produkt</label>
+                <%= po.input :product, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
+              </div>
+              <div>
+                <label for="exampleFormControlInput1" class="form-label">Podaj ilość</label>
+                <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
+              </div>
+            </div>
+          <% end %>
+          <templete data-order-form-target="template" class="hidden">
+            <%= f.simple_fields_for :product_orders, ProductOrder.new, child_index: 'TEMPLEATE_FIELD' do |po| %>
+              <div class="mb-4 flex-left full-width">
+                <div class="small-margin-lr">
+                  <%= po.input :product, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
+                </div>
+                <div>
+                  <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
+                </div>
+                <div class="small-margin-lr">
+                  <div class="btn btn-secondary" data-action="click->order-form#removeAssociations" >
+                    -
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </templete>
+          <div>
+            <div class="btn btn-light button-margin-vertical" data-action="click->order-form#addAssociation">
+              Dodaj produkt
+            </div>
+          </div>
+          <div class="mb-4">
+            <%= f.submit 'Zamów', class: 'btn btn-secondary button-margin-vertical' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

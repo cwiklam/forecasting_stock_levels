@@ -22,7 +22,7 @@ gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", '~> 1.0.0'
 
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+# Hotwire's modest JavaScript framework [https://.hotwired.dev]
 gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
