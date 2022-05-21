@@ -5,4 +5,14 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :product_orders
 
   scope :newest, -> { order('created_at DESC') }
+
+  before_save :count_price
+
+  private
+
+  def count_price
+    if price.blank?
+      self.price = product_orders.sum{ |po| po.quantity * po.product.price }
+    end
+  end
 end

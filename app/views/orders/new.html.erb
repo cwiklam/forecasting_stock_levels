@@ -15,7 +15,7 @@
             <div class="mb-4 flex-left full-width">
               <div class="small-margin-lr">
                 <label for="exampleFormControlInput1" class="form-label">Wybierz produkt</label>
-                <%= po.input :product, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
+                <%= po.input :product_id, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
               </div>
               <div>
                 <label for="exampleFormControlInput1" class="form-label">Podaj ilość</label>
@@ -24,10 +24,10 @@
             </div>
           <% end %>
           <templete data-order-form-target="template" class="hidden">
-            <%= f.simple_fields_for :product_orders, ProductOrder.new, child_index: 'TEMPLEATE_FIELD' do |po| %>
+            <%= f.simple_fields_for :product_orders, ProductOrder.new, child_index: 'TEMPLATE_FIELD' do |po| %>
               <div class="mb-4 flex-left full-width">
                 <div class="small-margin-lr">
-                  <%= po.input :product, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
+                  <%= po.input :product_id, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
                 </div>
                 <div>
                   <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
@@ -36,6 +36,7 @@
                   <div class="btn btn-secondary" data-action="click->order-form#removeAssociations" >
                     -
                   </div>
+                  <%= po.input :_destroy, as: :hidden %>
                 </div>
               </div>
             <% end %>

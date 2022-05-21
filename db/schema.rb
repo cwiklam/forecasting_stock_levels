@@ -23,13 +23,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_15_121505) do
   end
 
   create_table "product_orders", force: :cascade do |t|
-    t.bigint "products_id"
-    t.bigint "orders_id"
+    t.bigint "product_id"
+    t.bigint "order_id"
     t.integer "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["orders_id"], name: "index_product_orders_on_orders_id"
-    t.index ["products_id"], name: "index_product_orders_on_products_id"
+    t.index ["order_id"], name: "index_product_orders_on_order_id"
+    t.index ["product_id"], name: "index_product_orders_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|

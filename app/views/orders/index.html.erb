@@ -18,7 +18,7 @@
     <% @orders.each do |order| %>
       <tr class="table-dark">
         <th scope="row"><%= order.order_number %></th>
-        <td class="table-dark"><%= order.price %></td>
+        <td class="table-dark"><%= number_to_currency(order.price, unit: :zł, format: "%n %u") %></td>
         <td class="table-dark"><%= year_month_date(order.created_at) %></td>
       </tr>
     <% end %>

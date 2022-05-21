@@ -3,20 +3,19 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     static targets = ['template']
 
-    connect() {
-        console.log('Hello from stimulus')
-    }
-
     addAssociation(event) {
-        console.log('Hello from stimulus')
         event.preventDefault()
         const uniqueNumber = new Date().valueOf()
         const content = this.templateTarget.innerHTML.replace(/TEMPLATE_FIELD/g, uniqueNumber)
-        console.log(this.templateTarget)
+        console.log(content)
         this.templateTarget.insertAdjacentHTML('beforebegin', content)
     }
 
-    removeAssociations() {
-
+    removeAssociations(event) {
+        const fieldContainer = event.target.parentElement.parentElement
+        const destroyField = event.target.nextElementSibling.children[0]
+        console.log(destroyField)
+        fieldContainer.classList.add('hidden')
+        destroyField.value = 'true'
     }
 }
