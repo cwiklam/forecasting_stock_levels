@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - APP_DB_USER=postgres
+      - APP_DB_PASS=postgres
+      - APP_DB_NAME=forecasting_stock_levels_development
+    ports:
+      - '5432:5432'
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && ./bin/dev"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+volumes:
+  db:
+    driver: local
+
