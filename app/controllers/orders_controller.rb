@@ -12,6 +12,9 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.order_number = "#{DateTime.now.strftime('%Y/%m/%d/%H%M%S%L')}"
     if @order.save
+      @order.product_orders.each do |po|
+        po.product.update!(availability: po.product.availability - po.quantity)
+      end
       redirect_to orders_path, notice: 'Pomyślnie złożono zamówienie'
     else
       @products = Product.newest

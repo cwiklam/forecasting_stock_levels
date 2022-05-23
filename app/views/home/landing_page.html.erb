@@ -4,5 +4,7 @@
   <div class="chart-container">
     <canvas id="YOUR_ELEMENT_ID" width="400" height="400"></canvas>
   </div>
-  <div id="metrics" data-labels="<%= Order.all.map(&:order_number) %>" data-metrics="<%= Order.all.map(&:price) %>"></div>
+  <div class="hidden" data-labels="<%= @products.map(&:name) %>" data-chart-target="labels"></div>
+  <div class="hidden" data-metrics="<%= @products.map(&:max) %>" data-chart-target="max"></div>
+  <div class="hidden" data-metrics="<%= @products.map(&:availability) %>" data-chart-target="available"></div>
 </div>
