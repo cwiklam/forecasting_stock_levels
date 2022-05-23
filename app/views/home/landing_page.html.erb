@@ -1,4 +1,8 @@
-<div class="container flex-column-center">
+<div class="container flex-column-center" data-controller="chart">
   <h1>Cześć!</h1>
   <h2>Witaj na aplikacji do prognozowania stanów magazynowych</h2>
+  <div class="chart-container">
+    <canvas id="YOUR_ELEMENT_ID" width="400" height="400"></canvas>
+  </div>
+  <div id="metrics" data-labels="<%= Order.all.map(&:order_number) %>" data-metrics="<%= Order.all.map(&:price) %>"></div>
 </div>

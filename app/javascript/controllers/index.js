@@ -8,6 +8,8 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 import OrderFormController from "./order_form_controller"
+import ChartController from "./chart_controller"
+application.register("chart", ChartController)
 application.register("hello", HelloController)
 application.register("order-form", OrderFormController)
 // Lazy load controllers as they appear in the DOM (remember not to preload controllers in import map!)
