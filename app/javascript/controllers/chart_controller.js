@@ -20,7 +20,6 @@ export default class extends Controller {
     refresh() {
         const urlTarget = this.urlTarget
         const chart = this.graph
-        const metrics = this.metrics2
         setInterval(function () {
             fetch(urlTarget.dataset.url, {
                 method: "GET",
