@@ -2,7 +2,6 @@
   <h1>Cześć!</h1>
   <h2>Witaj na aplikacji do prognozowania stanów magazynowych</h2>
   <div class="chart-container">
-    <div class="hidden" data-chart-target="beforeCanvas"></div>
     <canvas id="YOUR_ELEMENT_ID" width="1000" height="600"></canvas>
   </div>
   <div class="hidden" data-labels="<%= @products.map(&:name) %>" data-chart-target="labels"></div>
