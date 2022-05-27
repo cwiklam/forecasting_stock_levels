@@ -53,7 +53,8 @@ SimpleForm.setup do |config|
 
     ## Inputs
     # b.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
-    b.use :label_input
+    b.use :label, class: 'title is-5 light_grey text-normal-margin-bottom'
+    b.use :input, class: 'dark-input', error_class: 'invalid-feedback', wrap_with: { tag: :div, class: :control }
     b.use :hint,  wrap_with: { tag: :span, class: :hint }
     b.use :error, wrap_with: { tag: :span, class: :error }
 
