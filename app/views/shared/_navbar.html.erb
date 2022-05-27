@@ -1,8 +1,8 @@
-<% if current_user.present? %>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-margin-bottom">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<nav class="navbar-container navbar navbar-expand-lg navbar-dark bg-dark navbar-margin-bottom">
+  <div class="container-fluid full-height">
+    <div class="collapse navbar-collapse navbar-height" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if current_user.present? %>
           <li class="nav-item">
             <%= link_to 'Strona główna', root_path, class: "nav-link#{' active' if request.path == root_path}" %>
           </li>
@@ -12,8 +12,29 @@
           <li class="nav-item">
             <%= link_to 'Zamówienia', orders_path, class: "nav-link#{' active' if request.path.include?('/orders')}" %>
           </li>
-        </ul>
+        <% end %>
+      </ul>
+      <div class="navbar-nav flex-right">
+        <% if current_user.present? %>
+          <div class="dropdown">
+              <div class="nav-item dropdown-toggle" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= current_user.email %>
+              </div>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownUser">
+              <li class="bg-dark p-4">
+                <%= link_to 'Wyloguj', destroy_user_session_path, data: { "turbo-method": :delete }, class: 'nav-link active' %>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="nav-item">
+            <%= link_to 'Zarejestruj się', new_user_registration_path, class: 'nav-link' %>
+          </div>
+          <div class="nav-item">
+            <%= link_to 'Zaloguj się', new_user_session_path, class: 'nav-link' %>
+          </div>
+        <% end %>
       </div>
     </div>
-  </nav>
-<% end %>
+  </div>
+</nav>

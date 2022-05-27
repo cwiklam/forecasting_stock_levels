@@ -32,12 +32,20 @@ body {
   margin-bottom: 50px;
 }
 
+.navbar-height {
+  height: 40px !important;
+}
+
 .min-width {
   width: min-content !important;
 }
 
 .full-width {
   width: 100%;
+}
+
+.full-height {
+  height: max-content;
 }
 
 .button-margin-vertical {
@@ -82,7 +90,7 @@ input:focus {
 
 .btn-link:hover {
   color: #eee;
-  background-color: rgb(256,256,256,0.05);
+  background-color: rgb(256, 256, 256, 0.05);
   text-decoration: none;
   border-radius: 10px;
 }

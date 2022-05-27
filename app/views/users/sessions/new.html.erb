@@ -16,10 +16,12 @@
               <%= f.input :password, input_html: { class: 'dark-input', id: 'form-symbol' }, placeholder: 'Hasło', label: false %>
             </div>
             <div class="mb-4">
+              <span>
               <%= link_to 'Utwórz konto', new_user_registration_path %>
+              </span>
             </div>
             <div class="mb-4">
-              <%= f.submit 'Utwórz konto', class: 'btn btn-secondary button-margin-vertical' %>
+              <%= f.submit 'Zaloguj', class: 'btn btn-secondary button-margin-vertical' %>
             </div>
           </div>
         </div>
