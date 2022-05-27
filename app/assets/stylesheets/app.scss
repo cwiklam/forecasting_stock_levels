@@ -71,6 +71,7 @@ input:focus {
   padding: 30px 15px 0 0;
   background-color: #394047;
   border-radius: 10px;
+  max-width: 400px;
 }
 
 .btn-link {
@@ -88,4 +89,8 @@ input:focus {
 
 .hidden {
   display: none;
+}
+
+.vh100 {
+  height: 100vh;
 }

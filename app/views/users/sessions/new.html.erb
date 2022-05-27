@@ -1,0 +1,29 @@
+<div class="flex-center vh100">
+  <div class="container">
+    <%= simple_form_for @user, url: user_session_path, method: :post do |f| %>
+      <div class="container">
+        <div class="row flex-center">
+          <div class="col-4 flex-column-center input form-container full-width">
+            <div class="mb-4">
+              <h4>Logowanie</h4>
+            </div>
+            <div class="mb-4">
+              <label for="exampleFormControlInput1" class="form-label">Email</label>
+              <%= f.input :email, input_html: { class: 'dark-input', id: 'form-name' }, placeholder: 'Email', label: false %>
+            </div>
+            <div class="mb-4">
+              <label for="exampleFormControlInput1" class="form-label">Hasło</label>
+              <%= f.input :password, input_html: { class: 'dark-input', id: 'form-symbol' }, placeholder: 'Hasło', label: false %>
+            </div>
+            <div class="mb-4">
+              <%= link_to 'Utwórz konto', new_user_registration_path %>
+            </div>
+            <div class="mb-4">
+              <%= f.submit 'Utwórz konto', class: 'btn btn-secondary button-margin-vertical' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
