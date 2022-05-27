@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_26_171408) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_231919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "logs", force: :cascade do |t|
+    t.string "txt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "orders", force: :cascade do |t|
     t.string "order_number", null: false
@@ -40,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_171408) do
     t.integer "max", null: false
     t.integer "percent_resource"
     t.jsonb "atts"
+    t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

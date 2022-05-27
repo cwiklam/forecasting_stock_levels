@@ -8,6 +8,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.integer :max, null: false
       t.integer :percent_resource
       t.jsonb :atts
+      t.datetime :sent_at
 
       t.timestamps
     end
