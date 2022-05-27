@@ -13,6 +13,7 @@
       <th class="table-dark" scope="col">Nazwa</th>
       <th class="table-dark" scope="col">Dostępność</th>
       <th class="table-dark" scope="col">Cena</th>
+      <th class="table-dark" scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
         <td class="table-dark"><%= product.name %></td>
         <td class="table-dark"><%= product.availability %></td>
         <td class="table-dark"><%= product.price %></td>
+        <td class="table-dark"><%= link_to 'edit', edit_product_path(product) %></td>
       </tr>
     <% end %>
     </tbody>

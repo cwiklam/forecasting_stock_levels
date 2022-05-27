@@ -11,6 +11,6 @@ class HomeController < ApplicationController
   private
 
   def fetch_products
-    @products = Product.first(15)
+    @products = Product.smallest_resources
   end
 end

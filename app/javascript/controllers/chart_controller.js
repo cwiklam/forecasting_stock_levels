@@ -38,6 +38,8 @@ export default class extends Controller {
                         availableArray.push(parseInt(data[key].availability))
                     })
                     chart.data.datasets[1].data = availableArray
+                    chart.data.datasets[0].data = maxArray
+                    chart.data.labels = labelsArray
                     chart.update();
                 })
                 .catch(err => console.log(err))

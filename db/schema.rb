@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_26_171408) do
     t.integer "price", null: false
     t.integer "availability", null: false
     t.integer "max", null: false
+    t.integer "percent_resource"
     t.jsonb "atts"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
