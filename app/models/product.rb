@@ -7,6 +7,8 @@ class Product < ApplicationRecord
   scope :low_resources, -> { where('percent_resource <= 20') }
 
   validates :name, :price, :availability, :max, presence: true
+  validates :price, :availability, :max, numericality:
+    { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 100000 }
   validate :availability_less_than_max
 
   after_save :count_percent_resource
