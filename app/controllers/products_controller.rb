@@ -29,13 +29,10 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to products_path, notice: "Pomyślnie dodano produkt"
     else
-      render 'edit'
+      render 'edit', status: 400
     end
   end
 
-  def destroy
-
-  end
 
   private
 

@@ -4,21 +4,23 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
+    @order    = Order.new
     @products = Product.newest
   end
 
   def create
-    @order = Order.new(order_params)
+    @order              = Order.new(order_params)
     @order.order_number = "#{DateTime.now.strftime('%Y/%m/%d/%H%M%S%L')}"
     if @order.save
       @order.product_orders.each do |po|
         po.product.update!(availability: po.product.availability - po.quantity)
       end
-      redirect_to orders_path, notice: 'Pomyślnie złożono zamówienie'
+      successfully_response(object: { message: 'Pomyślnie złożono zamówienie' },
+                            notice: 'Pomyślnie złożono zamówienie',
+                            path:   orders_path)
     else
       @products = Product.newest
-      render new
+      not_valid_response(object: @order, action: 'new')
     end
   end
 

@@ -6,7 +6,9 @@ class Order < ApplicationRecord
 
   scope :newest, -> { order('created_at DESC') }
 
-  before_save :count_price
+  validates :order_number, :price, presence: true
+
+  before_validation :count_price
 
   private
 
@@ -14,5 +16,7 @@ class Order < ApplicationRecord
     if price.blank?
       self.price = product_orders.sum{ |po| po.quantity * po.product.price }
     end
+  rescue NoMethodError
+    errors.add(:product_orders, "Nie wypełniłeś wszystkich pól")
   end
 end

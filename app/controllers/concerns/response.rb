@@ -7,7 +7,7 @@ module Response
     respond_to do |format|
       format.html do
         if path.present?
-        redirect_to path, notice: notice
+          redirect_to path, notice: notice
         end
       end
       format.json do
@@ -19,9 +19,7 @@ module Response
   def not_valid_response(object:, action:, status: 400)
     respond_to do |format|
       format.html do
-        if path.present?
-          render action
-        end
+        render action, status: 400
       end
       format.json do
         json_response({ error: object.errors.messages }, status)

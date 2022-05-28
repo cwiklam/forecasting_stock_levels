@@ -9,6 +9,10 @@ export default class extends Controller {
         this.refresh()
     }
 
+    disconnect() {
+
+    }
+
     render() {
         if (!this.ele) return;
 

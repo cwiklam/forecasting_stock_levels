@@ -3,6 +3,7 @@ class ProductOrder < ApplicationRecord
   belongs_to :product, optional: true
 
   after_save :count_percent_resource
+  validates :product_id, :quantity, presence: true
 
   private
 

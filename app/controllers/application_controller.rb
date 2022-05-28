@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
   end
 
   def json_request?
-    request.headers['Content-Type'] == 'application/json' && request.headers['Accept'] == 'application/json'
+    request.headers['Accept'] == 'application/json'
   end
 end

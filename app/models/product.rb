@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   scope :smallest_resources, -> { order('percent_resource ASC').limit(15) }
   scope :low_resources, -> { where('percent_resource <= 20') }
 
+  validates :name, :price, :availability, :max, presence: true
   validate :availability_less_than_max
 
   after_save :count_percent_resource
@@ -31,7 +32,7 @@ class Product < ApplicationRecord
   private
 
   def availability_less_than_max
-    return if availability <= max
+    return if availability.present? && max.present? && availability <= max
 
     errors.add(:availability, 'Dostępna ilość produktów jest większa niż maksymalna')
   end

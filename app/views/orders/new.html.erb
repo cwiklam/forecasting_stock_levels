@@ -11,6 +11,7 @@
           <div class="mb-4">
             <h4>Składanie nowego zamówienia</h4>
           </div>
+          <%= f.error :product_orders, class: 'border border-2 border-danger text-danger margin-normal small-padding' %>
           <%= f.simple_fields_for :product_orders, ProductOrder.new do |po| %>
             <div class="mb-4 flex-left full-width">
               <div class="small-margin-lr">

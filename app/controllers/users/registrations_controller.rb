@@ -11,7 +11,7 @@ module Users
       if @user.save
         redirect_to new_user_session_path, notice: "Pomyślnie utworzono konto"
       else
-        render 'new'
+        render 'new', status: 400
       end
     end
 

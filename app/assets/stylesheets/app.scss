@@ -56,6 +56,10 @@ body {
   margin: 0 10px;
 }
 
+.small-padding {
+  padding: 10px;
+}
+
 .dark-input {
   background-color: #2a2a2f;
   color: #ddd;
@@ -79,7 +83,7 @@ input:focus {
   padding: 30px 15px 0 0;
   background-color: #394047;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .btn-link {
@@ -101,4 +105,8 @@ input:focus {
 
 .vh100 {
   height: 100vh;
+}
+
+.field {
+  max-width: 230px;
 }

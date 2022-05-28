@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 
   root to: 'home#landing_page'
   get '/get_products', to: 'home#get_products'
-  resources :products, only: %i[index new create edit update destroy]
+  resources :products, only: %i[index new create edit update]
   resources :orders, only: %i[index new create]
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
