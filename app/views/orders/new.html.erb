@@ -12,17 +12,26 @@
             <h4>Składanie nowego zamówienia</h4>
           </div>
           <%= f.error :product_orders, class: 'border border-2 border-danger text-danger margin-normal small-padding' %>
-          <%= f.simple_fields_for :product_orders, ProductOrder.new do |po| %>
-            <div class="mb-4 flex-left full-width">
-              <div class="small-margin-lr">
-                <label for="exampleFormControlInput1" class="form-label">Wybierz produkt</label>
-                <%= po.input :product_id, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
+          <% @order.product_orders.each do |product_order| %>
+            <%= f.simple_fields_for :product_orders, product_order do |po| %>
+              <div class="mb-4 flex-left full-width">
+                <div class="small-margin-lr">
+                  <label for="exampleFormControlInput1" class="form-label">Wybierz produkt</label>
+                  <%= po.input :product_id, as: :select, selected: product_order.product_id || '', collection: @products, input_html: { class: 'dark-input' }, label: false %>
+                </div>
+                <div>
+                  <label for="exampleFormControlInput1" class="form-label">Podaj ilość</label>
+                  <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
+                </div>
               </div>
-              <div>
-                <label for="exampleFormControlInput1" class="form-label">Podaj ilość</label>
-                <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
+              <div class="text-danger">
+                <% @order.errors.messages[:"product_order_#{product_order.product.name}"].each do |error| %>
+                  <div class="error mb-4">
+                    <%= error %>
+                  </div>
+                <% end %>
               </div>
-            </div>
+            <% end %>
           <% end %>
           <templete data-order-form-target="template" class="hidden">
             <%= f.simple_fields_for :product_orders, ProductOrder.new, child_index: 'TEMPLATE_FIELD' do |po| %>
@@ -34,7 +43,7 @@
                   <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
                 </div>
                 <div class="small-margin-lr">
-                  <div class="btn btn-secondary" data-action="click->order-form#removeAssociations" >
+                  <div class="btn btn-secondary" data-action="click->order-form#removeAssociations">
                     -
                   </div>
                   <%= po.input :_destroy, as: :hidden %>

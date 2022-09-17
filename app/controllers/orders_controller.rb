@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
 
   def new
     @order    = Order.new
+    @order.product_orders.build
     @products = Product.alphabetically
   end
 
@@ -19,7 +20,8 @@ class OrdersController < ApplicationController
                             notice: 'Pomyślnie złożono zamówienie',
                             path:   orders_path)
     else
-      @products = Product.newest
+      @products = Product.alphabetically
+      @order.product_orders.build if @order.product_orders.blank?
       not_valid_response(object: @order, action: 'new')
     end
   end
