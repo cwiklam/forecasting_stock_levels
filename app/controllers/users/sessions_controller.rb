@@ -8,10 +8,12 @@ module Users
 
     def create
       super
+      flash[:notice] = "Pomyślnie zalogowano" if signed_in?
     end
 
     def destroy
       super
+      flash[:notice] = "Pomyślnie wylogowano" unless signed_in?
     end
   end
 end
