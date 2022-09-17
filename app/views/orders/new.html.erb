@@ -12,22 +12,34 @@
             <h4>Składanie nowego zamówienia</h4>
           </div>
           <%= f.error :product_orders, class: 'border border-2 border-danger text-danger margin-normal small-padding' %>
-          <% @order.product_orders.each do |product_order| %>
+          <% @order.product_orders&.each_with_index do |product_order, i| %>
             <%= f.simple_fields_for :product_orders, product_order do |po| %>
-              <div class="mb-4 flex-left full-width">
-                <div class="small-margin-lr">
-                  <label for="exampleFormControlInput1" class="form-label">Wybierz produkt</label>
-                  <%= po.input :product_id, as: :select, selected: product_order.product_id || '', collection: @products, input_html: { class: 'dark-input' }, label: false %>
+              <div id="<%= "po_#{i}" %>" class="mb-4 flex-column full-width">
+                <div class="mb-4 flex-left full-width">
+                  <div class="small-margin-lr">
+                    <label for="exampleFormControlInput1" class="form-label">Wybierz produkt</label>
+                    <%= po.input :product_id, as: :select, selected: product_order.product_id || '', collection: @products, input_html: { class: 'dark-input' }, label: false %>
+                  </div>
+                  <div>
+                    <label for="exampleFormControlInput1" class="form-label">Podaj ilość</label>
+                    <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
+                  </div>
+                  <% if i > 0 %>
+                    <div class="small-margin-lr">
+                      <div class="btn btn-secondary" data-action="click->order-form#removeAssociations" value="<%= i %>">
+                        -
+                      </div>
+                      <%= po.input :_destroy, id: "destroy_#{i}", as: :hidden %>
+                    </div>
+                  <% end %>
                 </div>
-                <div>
-                  <label for="exampleFormControlInput1" class="form-label">Podaj ilość</label>
-                  <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
-                </div>
-              </div>
-              <div class="text-danger">
-                <% @order.errors.messages[:"product_order_#{product_order.product.name}"].each do |error| %>
-                  <div class="error mb-4">
-                    <%= error %>
+                <% if @order.try(:errors).try(:messages).present? %>
+                  <div class="text-danger">
+                    <% @order.errors.messages[:"product_order_#{product_order.product.name}"].each do |error| %>
+                      <div class="flex-center error mb-4">
+                        <%= error %>
+                      </div>
+                    <% end %>
                   </div>
                 <% end %>
               </div>
@@ -35,18 +47,20 @@
           <% end %>
           <templete data-order-form-target="template" class="hidden">
             <%= f.simple_fields_for :product_orders, ProductOrder.new, child_index: 'TEMPLATE_FIELD' do |po| %>
-              <div class="mb-4 flex-left full-width">
-                <div class="small-margin-lr">
-                  <%= po.input :product_id, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
-                </div>
-                <div>
-                  <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
-                </div>
-                <div class="small-margin-lr">
-                  <div class="btn btn-secondary" data-action="click->order-form#removeAssociations">
-                    -
+              <div id="po_TEMPLATE_FIELD" class="mb-4 flex-column full-width">
+                <div class="mb-4 flex-left full-width">
+                  <div class="small-margin-lr">
+                    <%= po.input :product_id, as: :select, collection: @products, input_html: { class: 'dark-input' }, label: false %>
                   </div>
-                  <%= po.input :_destroy, as: :hidden %>
+                  <div>
+                    <%= po.input :quantity, as: :integer, input_html: { class: 'dark-input' }, label: false %>
+                  </div>
+                  <div class="small-margin-lr">
+                    <div class="btn btn-secondary" data-action="click->order-form#removeAssociations" value="TEMPLATE_FIELD">
+                      -
+                    </div>
+                    <%= po.input :_destroy, id: "destroy_TEMPLATE_FIELD", as: :hidden %>
+                  </div>
                 </div>
               </div>
             <% end %>

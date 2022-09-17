@@ -23,8 +23,12 @@ class Order < ApplicationRecord
 
   def products_count
     product_orders.each do |product_order|
+      product = product_order.product.name
+      if product_order.quantity.nil? || Integer(product_order.quantity) < 0
+        errors.add("product_order_#{product}", "Wartość musi być liczbą wiekszą od 0")
+        next
+      end
       if product_order.quantity > product_order.product.availability
-        product = product_order.product.name
         errors.add("product_order_#{product}", "Niewystarczająca ilość produktu na magazynie")
       end
     end

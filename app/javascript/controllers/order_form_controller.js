@@ -15,9 +15,7 @@ export default class extends Controller {
     }
 
     removeAssociations(event) {
-        const fieldContainer = event.target.parentElement.parentElement
-        const destroyField = event.target.nextElementSibling.children[0]
-        fieldContainer.classList.add('hidden')
-        destroyField.value = 'true'
+        const fieldContainer = document.getElementById(`po_${event.target.attributes.value.value}`)
+        fieldContainer.remove()
     }
 }
