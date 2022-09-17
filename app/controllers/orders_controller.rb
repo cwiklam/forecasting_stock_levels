@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
   def new
     @order    = Order.new
-    @products = Product.newest
+    @products = Product.alphabetically
   end
 
   def create
