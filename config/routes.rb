@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get '/get_products', to: 'home#get_products'
   resources :products, only: %i[index new create edit update]
   resources :orders, only: %i[index new create]
+  resources :forecastings, only: %i[index show]
 end

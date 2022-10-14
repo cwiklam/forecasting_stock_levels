@@ -10,7 +10,7 @@ export default class extends Controller {
     }
 
     disconnect() {
-
+        clearInterval(this.analize)
     }
 
     render() {
@@ -24,7 +24,7 @@ export default class extends Controller {
     refresh() {
         const urlTarget = this.urlTarget
         const chart = this.graph
-        setInterval(function () {
+        this.analize = setInterval(function () {
             fetch(urlTarget.dataset.url, {
                 method: "GET",
                 headers: {

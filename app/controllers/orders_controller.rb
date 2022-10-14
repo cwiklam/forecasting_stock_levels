@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order    = Order.new
+    @order = Order.new
     @order.product_orders.build
     @products = Product.alphabetically
   end
