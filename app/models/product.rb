@@ -27,7 +27,7 @@ class Product < ApplicationRecord
       now          = Time.parse(DateTime.now.to_s)
       weeks_count  = (now - oldest_date).seconds.in_weeks.to_i.abs
       orders_count = product.product_orders.pluck(:quantity).sum
-      @average = (orders_count / weeks_count)
+      @average     = (orders_count / weeks_count)
       product.update_column(:weekly_consumption, @average)
       per_week_count = []
       date           = oldest_date
@@ -60,6 +60,21 @@ class Product < ApplicationRecord
 
   def self.test
     Log.create(txt: 'CRON')
+  end
+
+  def weeks_left
+    resources_left = (percent_resource / 100.0) * max
+    result         = (resources_left / weekly_consumption)
+    ratio          = (weekly_consumption_ratio - 100).abs
+    result_ratio   = ratio < 20 ? 0 : (ratio < 50 ? 0.1 : 0.2)
+    result         = result - result_ratio
+    if result < 1
+      "Mniej niż tydzień"
+    elsif result < 2
+      "Mniej niż 2 tygodnie"
+    else
+      "Powyżej dwóch tygodni"
+    end
   end
 
   private

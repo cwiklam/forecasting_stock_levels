@@ -1,0 +1,23 @@
+<div class="container flex-column-center">
+  <table class="table table-dark table-striped">
+    <thead>
+    <tr class="table-dark">
+      <th class="table-dark" scope="col">Nazwa</th>
+      <th class="table-dark" scope="col">Średnie tygodniowe zużycie</th>
+      <th class="table-dark" scope="col">Współczynnik regularności</th>
+      <th class="table-dark" scope="col">Szacowany termin wyzerowania zasobów</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <% ratio = (product.weekly_consumption_ratio - 100).abs %>
+      <tr class="table-dark">
+        <td class="table-dark"><%= product.name %></td>
+        <td class="table-dark"><%= product.weekly_consumption %></td>
+        <td class="table-dark"><%= ratio < 20 ? "Wysoki" : (ratio < 50 ? "Średni" : "Niski") %></td>
+        <td class="table-dark"><%= product.weeks_left %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
