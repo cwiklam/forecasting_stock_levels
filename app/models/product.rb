@@ -19,6 +19,18 @@ class Product < ApplicationRecord
     update_column(:percent_resource, (availability * 100 / max * 100) / 100)
   end
 
+  def self.count_weekly_consumption
+    Product.all.each do |product|
+      next if product.orders.count.zero?
+
+      oldest_date  = Time.parse(product.orders.oldest.limit(1).first.created_at.to_s)
+      now          = Time.parse(DateTime.now.to_s)
+      weeks_count  = (now - oldest_date).seconds.in_weeks.to_i.abs
+      orders_count = product.product_orders.pluck(:quantity).sum
+      product.update_column(:weekly_consumption, (orders_count / weeks_count))
+    end
+  end
+
   def self.check_stocks
     products = Product.low_resources
     products.each do |product|

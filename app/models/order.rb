@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :product_orders
 
   scope :newest, -> { order('created_at DESC') }
+  scope :oldest, -> { order('created_at ASC') }
 
   validates :order_number, :price, presence: true
   validate :products_count
