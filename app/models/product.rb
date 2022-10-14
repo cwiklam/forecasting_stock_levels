@@ -27,7 +27,24 @@ class Product < ApplicationRecord
       now          = Time.parse(DateTime.now.to_s)
       weeks_count  = (now - oldest_date).seconds.in_weeks.to_i.abs
       orders_count = product.product_orders.pluck(:quantity).sum
-      product.update_column(:weekly_consumption, (orders_count / weeks_count))
+      @average = (orders_count / weeks_count)
+      product.update_column(:weekly_consumption, @average)
+      per_week_count = []
+      date           = oldest_date
+      (weeks_count + 1).times do |i|
+        if i == weeks_count
+          date2 = now
+        else
+          date2 = date + 7.days
+        end
+        per_week_count << product.product_orders.where(:created_at => date..date2).pluck(:quantity).sum
+        date = date2
+      end
+      per_week_count.reject! { |value| value.zero? }
+      ratio = per_week_count.map do |value|
+        (@average * 100) / value
+      end.sum / per_week_count.count
+      product.update_column(:weekly_consumption_ratio, ratio)
     end
   end
 
