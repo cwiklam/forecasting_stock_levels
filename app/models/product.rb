@@ -77,7 +77,7 @@ class Product < ApplicationRecord
   end
 
   def resources_left
-    (percent_resource / 100.0) * max
+    ((percent_resource / 100.0) * max).to_i
   end
 
   private
