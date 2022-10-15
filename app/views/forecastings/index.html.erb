@@ -21,3 +21,33 @@
     </tbody>
   </table>
 </div>
+
+<% @products.each_with_index do |product, index| %>
+  <div class="margin-vertical-charts">
+    <div class="container">
+      <div class="flex-center">
+        <h3 class="toast-header"><%= product.name %></h3>
+      </div>
+    </div>
+    <div class="container flex-center margin-inside-vertical-charts">
+      <div class="flex-center margin-horizontal-charts">
+        <div class="chart-container" data-controller="forecastingcharts">
+          <div class="hidden" data-number="<%= "#{index}0" %>" data-forecastingcharts-target="option"></div>
+          <canvas id="YOUR_ELEMENT_ID_<%= "#{index}0" %>" width="400" height="300"></canvas>
+        </div>
+      </div>
+      <div class="flex-center margin-horizontal-charts">
+        <div class="chart-container" data-controller="forecastingcharts">
+          <div class="hidden" data-number="<%= "#{index}1" %>" data-forecastingcharts-target="option"></div>
+          <canvas id="YOUR_ELEMENT_ID_<%= "#{index}1" %>" width="400" height="300"></canvas>
+        </div>
+      </div>
+      <div class="flex-center margin-horizontal-charts">
+        <div class="chart-container" data-controller="forecastingcharts">
+          <div class="hidden" data-number="<%= "#{index}2" %>" data-forecastingcharts-target="option"></div>
+          <canvas id="YOUR_ELEMENT_ID_<%= "#{index}2" %>" width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
