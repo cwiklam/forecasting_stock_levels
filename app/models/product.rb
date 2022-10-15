@@ -63,7 +63,6 @@ class Product < ApplicationRecord
   end
 
   def weeks_left
-    resources_left = (percent_resource / 100.0) * max
     result         = (resources_left / weekly_consumption)
     ratio          = (weekly_consumption_ratio - 100).abs
     result_ratio   = ratio < 20 ? 0 : (ratio < 50 ? 0.1 : 0.2)
@@ -75,6 +74,10 @@ class Product < ApplicationRecord
     else
       "Powyżej dwóch tygodni"
     end
+  end
+
+  def resources_left
+    (percent_resource / 100.0) * max
   end
 
   private

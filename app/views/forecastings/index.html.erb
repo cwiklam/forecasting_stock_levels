@@ -30,21 +30,33 @@
       </div>
     </div>
     <div class="container flex-center margin-inside-vertical-charts">
-      <div class="flex-center margin-horizontal-charts">
+      <div class="flex-column-center margin-horizontal-charts">
+        <h5>Obecnie:</h5>
         <div class="chart-container" data-controller="forecastingcharts">
-          <div class="hidden" data-number="<%= "#{index}0" %>" data-forecastingcharts-target="option"></div>
+          <div class="hidden" data-forecastingcharts-target="option"
+               data-number="<%= "#{index}0" %>"
+               data-count="<%= product.resources_left %>"
+               data-max="<%= product.max %>"></div>
           <canvas id="YOUR_ELEMENT_ID_<%= "#{index}0" %>" width="400" height="300"></canvas>
         </div>
       </div>
-      <div class="flex-center margin-horizontal-charts">
+      <div class="flex-column-center margin-horizontal-charts">
+        <h5>Jutro:</h5>
         <div class="chart-container" data-controller="forecastingcharts">
-          <div class="hidden" data-number="<%= "#{index}1" %>" data-forecastingcharts-target="option"></div>
+          <div class="hidden" data-forecastingcharts-target="option"
+               data-number="<%= "#{index}1" %>"
+               data-count="<%= product.resources_left %>"
+               data-max="<%= product.max %>"></div>
           <canvas id="YOUR_ELEMENT_ID_<%= "#{index}1" %>" width="400" height="300"></canvas>
         </div>
       </div>
-      <div class="flex-center margin-horizontal-charts">
+      <div class="flex-column-center margin-horizontal-charts">
+        <h5>Za tydzien:</h5>
         <div class="chart-container" data-controller="forecastingcharts">
-          <div class="hidden" data-number="<%= "#{index}2" %>" data-forecastingcharts-target="option"></div>
+          <div class="hidden" data-forecastingcharts-target="option"
+               data-number="<%= "#{index}2" %>"
+               data-count="<%= product.resources_left %>"
+               data-max="<%= product.max %>"></div>
           <canvas id="YOUR_ELEMENT_ID_<%= "#{index}2" %>" width="400" height="300"></canvas>
         </div>
       </div>
