@@ -14,6 +14,8 @@ export default class extends Controller {
         if (!this.ele) return;
 
         const ctx = this.ele.getContext('2d');
+        console.log(parseFloat(this.count))
+        const color = (parseFloat(this.count) < 0 )? 'rgb(240, 150, 150, 0.4)' : 'rgb(60, 200, 240, 0.4)'
         console.log(String(parseInt(String(this.max * 0.6))))
         this.config = {
             data: {
@@ -21,8 +23,8 @@ export default class extends Controller {
                     type: 'bar',
                     label: 'Zasoby',
                     data: [0, this.count, 0],
-                    borderColor: 'rgb(60, 60, 240)',
-                    backgroundColor: 'rgba(60, 200, 240, 0.4)'
+                    borderColor: 'rgba(60, 200, 240, 0.4)',
+                    backgroundColor: color
                 }, {
                     type: 'line',
                     label: 'Maksymalny stan',
@@ -44,6 +46,13 @@ export default class extends Controller {
                     borderColor: 'rgba(255, 50, 50, 0.7)',
                     pointBackgroundColor: 'rgba(255, 50, 50, 0)',
                     pointBorderColor: 'rgba(255, 50, 50, 0)'
+                }, {
+                    type: 'line',
+                    label: 'Stan niski',
+                    data: [0, 0, 0],
+                    borderColor: 'rgba(255, 255, 255, 0.7)',
+                    pointBackgroundColor: 'rgba(255, 255, 255, 0)',
+                    pointBorderColor: 'rgba(255, 255, 255, 0)'
                 }],
                 labels: ['', 'Zasoby', '']
             },

@@ -5,6 +5,8 @@ class ProductOrder < ApplicationRecord
   after_save :count_percent_resource
   validates :product_id, presence: true
 
+  scope :oldest, -> { order('created_at ASC') }
+
   private
 
   def count_percent_resource

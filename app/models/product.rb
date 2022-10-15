@@ -23,15 +23,15 @@ class Product < ApplicationRecord
     Product.all.each do |product|
       next if product.orders.count.zero?
 
-      oldest_date  = Time.parse(product.orders.oldest.limit(1).first.created_at.to_s)
+      oldest_date  = Time.parse(product.product_orders.oldest.limit(1).first.created_at.to_s)
       now          = Time.parse(DateTime.now.to_s)
-      weeks_count  = (now - oldest_date).seconds.in_weeks.to_i.abs
+      weeks_count  = (now - oldest_date).seconds.in_weeks.round.abs
       orders_count = product.product_orders.pluck(:quantity).sum
-      @average     = (orders_count / weeks_count)
-      product.update_column(:weekly_consumption, @average)
+      average     = (orders_count / (weeks_count.zero? ? 1 : weeks_count))
+      product.update_column(:weekly_consumption, average)
       per_week_count = []
       date           = oldest_date
-      (weeks_count + 1).times do |i|
+      weeks_count.times do |i|
         if i == weeks_count
           date2 = now
         else
@@ -42,9 +42,38 @@ class Product < ApplicationRecord
       end
       per_week_count.reject! { |value| value.zero? }
       ratio = per_week_count.map do |value|
-        (@average * 100) / value
+        (average * 100) / value
       end.sum / per_week_count.count
       product.update_column(:weekly_consumption_ratio, ratio)
+    end
+  end
+
+  def self.count_daily_consumption
+    Product.all.each do |product|
+      next if product.orders.count.zero?
+
+      oldest_date  = Time.parse(product.product_orders.oldest.limit(1).first.created_at.to_s)
+      now          = Time.parse(DateTime.now.to_s)
+      days_count  = (now - oldest_date).seconds.in_days.round.abs
+      orders_count = product.product_orders.pluck(:quantity).sum
+      average     = (orders_count / (days_count.zero? ? 1 : days_count))
+      product.update_column(:daily_consumption, average)
+      per_day_count = []
+      date           = oldest_date
+      days_count.times do |i|
+        if i == days_count
+          date2 = now
+        else
+          date2 = date + 1.days
+        end
+        per_day_count << product.product_orders.where(:created_at => date..date2).pluck(:quantity).sum
+        date = date2
+      end
+      # per_day_count.reject! { |value| value.zero? }
+      ratio = per_day_count.map do |value|
+        (average * 100) / value
+      end.sum / per_day_count.count
+      product.update_column(:daily_consumption_ratio, ratio)
     end
   end
 

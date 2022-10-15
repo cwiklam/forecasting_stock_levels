@@ -45,7 +45,7 @@
         <div class="chart-container" data-controller="forecastingcharts">
           <div class="hidden" data-forecastingcharts-target="option"
                data-number="<%= "#{index}1" %>"
-               data-count="<%= product.resources_left %>"
+               data-count="<%= product.resources_left - product.daily_consumption %>"
                data-max="<%= product.max %>"></div>
           <canvas id="YOUR_ELEMENT_ID_<%= "#{index}1" %>" width="400" height="300"></canvas>
         </div>
@@ -55,7 +55,7 @@
         <div class="chart-container" data-controller="forecastingcharts">
           <div class="hidden" data-forecastingcharts-target="option"
                data-number="<%= "#{index}2" %>"
-               data-count="<%= product.resources_left %>"
+               data-count="<%= product.resources_left - product.weekly_consumption %>"
                data-max="<%= product.max %>"></div>
           <canvas id="YOUR_ELEMENT_ID_<%= "#{index}2" %>" width="400" height="300"></canvas>
         </div>
