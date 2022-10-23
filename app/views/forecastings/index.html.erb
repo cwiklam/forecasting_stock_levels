@@ -3,6 +3,8 @@
     <thead>
     <tr class="table-dark">
       <th class="table-dark" scope="col">Nazwa</th>
+      <th class="table-dark" scope="col">Średnie dzienne zużycie</th>
+      <th class="table-dark" scope="col">Współczynnik regularności</th>
       <th class="table-dark" scope="col">Średnie tygodniowe zużycie</th>
       <th class="table-dark" scope="col">Współczynnik regularności</th>
       <th class="table-dark" scope="col">Szacowany termin wyzerowania zasobów</th>
@@ -10,11 +12,14 @@
     </thead>
     <tbody>
     <% @products.each do |product| %>
-      <% ratio = (product.weekly_consumption_ratio - 100).abs %>
+      <% ratio_daily = (product.daily_consumption_ratio - 100).abs %>
+      <% ratio_weekly = (product.weekly_consumption_ratio - 100).abs %>
       <tr class="table-dark">
         <td class="table-dark"><%= product.name %></td>
+        <td class="table-dark"><%= product.daily_consumption %></td>
+        <td class="table-dark"><%= ratio_daily < 20 ? "Wysoki" : (ratio_daily < 50 ? "Średni" : "Niski") %></td>
         <td class="table-dark"><%= product.weekly_consumption %></td>
-        <td class="table-dark"><%= ratio < 20 ? "Wysoki" : (ratio < 50 ? "Średni" : "Niski") %></td>
+        <td class="table-dark"><%= ratio_weekly < 20 ? "Wysoki" : (ratio_weekly < 50 ? "Średni" : "Niski") %></td>
         <td class="table-dark"><%= product.weeks_left %></td>
       </tr>
     <% end %>
@@ -36,7 +41,8 @@
           <div class="hidden" data-forecastingcharts-target="option"
                data-number="<%= "#{index}0" %>"
                data-count="<%= product.resources_left %>"
-               data-max="<%= product.max %>"></div>
+               data-max="<%= product.max %>"
+               data-ymin="<%= product.resources_left - product.weekly_consumption %>"></div>
           <canvas id="YOUR_ELEMENT_ID_<%= "#{index}0" %>" width="400" height="300"></canvas>
         </div>
       </div>
