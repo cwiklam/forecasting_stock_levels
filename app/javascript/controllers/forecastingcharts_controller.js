@@ -53,7 +53,7 @@ export default class extends Controller {
                     pointBorderColor: 'rgba(255, 50, 50, 0)'
                 }, {
                     type: 'line',
-                    label: 'Stan niski',
+                    label: 'Stan zerowy',
                     data: [0, 0, 0],
                     yAxisID: 'y',
                     borderColor: 'rgba(255, 255, 255, 0.7)',
