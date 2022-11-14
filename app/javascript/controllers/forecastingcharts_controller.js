@@ -9,8 +9,7 @@ export default class extends Controller {
         this.max = this.optionTarget.dataset.max
         this.yMin = parseInt(this.optionTarget.dataset.ymin) > 0 ? 0 : parseInt(this.optionTarget.dataset.ymin)
         this.yMax = ((parseInt(this.max) + 1000) / 1000 ) * 1000
-        console.log(this.yMin)
-        console.log(this.yMax)
+        console.log(this.optionTarget.dataset)
         this.render();
     }
 
