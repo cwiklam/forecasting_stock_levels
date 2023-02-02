@@ -19,7 +19,7 @@
         <td class="table-dark"><%= product.daily_consumption %></td>
         <td class="table-dark"><%= ratio_daily < 20 ? "Wysoki" : (ratio_daily < 50 ? "Średni" : "Niski") %></td>
         <td class="table-dark"><%= product.weekly_consumption %></td>
-        <td class="table-dark"><%= ratio_weekly < 20 ? "Wysoki" : (ratio_weekly < 50 ? "Średni" : "Niski") %></td>
+        <td class="table-dark"><%= ratio_weekly < 10 ? "Wysoki" : (ratio_weekly < 20 ? "Średni" : "Niski") %></td>
         <td class="table-dark"><%= product.weeks_left %></td>
       </tr>
     <% end %>

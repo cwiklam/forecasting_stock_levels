@@ -35,10 +35,10 @@ class Product < ApplicationRecord
   end
 
   def weeks_left
-    result         = (resources_left / weekly_consumption)
-    ratio          = (weekly_consumption_ratio - 100).abs
-    result_ratio   = ratio < 20 ? 0 : (ratio < 50 ? 0.1 : 0.2)
-    result         = result - result_ratio
+    result       = (resources_left / weekly_consumption)
+    ratio        = (weekly_consumption_ratio - 100).abs
+    result_ratio = ratio < 20 ? 0 : (ratio < 50 ? 0.1 : 0.2)
+    result       = result - result_ratio
     if result < 1
       days_left
     elsif result < 2
@@ -55,10 +55,10 @@ class Product < ApplicationRecord
   private
 
   def days_left
-    result = (resources_left / daily_consumption)
-    ratio = (daily_consumption_ratio - 100).abs
+    result       = (resources_left / daily_consumption)
+    ratio        = (daily_consumption_ratio - 100).abs
     result_ratio = ratio < 20 ? 0 : (ratio < 50 ? 0.1 : 0.2)
-    result = result - result_ratio
+    result       = result - result_ratio
     if result < 1
       "Mniej niż dzień"
     else
@@ -84,7 +84,7 @@ class Product < ApplicationRecord
       now          = Time.parse(DateTime.now.to_s)
       weeks_count  = (now - oldest_date).seconds.in_weeks.round.abs
       orders_count = product.product_orders.pluck(:quantity).sum # count of all ordered products
-      average     = (orders_count / (weeks_count.zero? ? 1 : weeks_count))
+      average      = (orders_count / (weeks_count.zero? ? 1 : weeks_count))
       product.update_column(:weekly_consumption, average)
       per_week_count = []
       date           = oldest_date
@@ -98,7 +98,7 @@ class Product < ApplicationRecord
         date = date2
       end
       per_week_count.reject! { |value| value.zero? }
-      ratio = per_week_count.count.zero? ? 0 : per_week_count.map do |value|
+      ratio = per_week_count.map do |value|
         (average * 100) / value
       end.sum / per_week_count.count
       product.update_column(:weekly_consumption_ratio, ratio)
@@ -111,12 +111,12 @@ class Product < ApplicationRecord
 
       oldest_date  = Time.parse(product.product_orders.oldest.limit(1).first.created_at.to_s)
       now          = Time.parse(DateTime.now.to_s)
-      days_count  = (now - oldest_date).seconds.in_days.round.abs
+      days_count   = (now - oldest_date).seconds.in_days.round.abs
       orders_count = product.product_orders.pluck(:quantity).sum
-      average     = (orders_count / (days_count.zero? ? 1 : days_count))
+      average      = (orders_count / (days_count.zero? ? 1 : days_count))
       product.update_column(:daily_consumption, average)
       per_day_count = []
-      date           = oldest_date
+      date          = oldest_date
       days_count.times do |i|
         if i == days_count
           date2 = now
@@ -127,7 +127,7 @@ class Product < ApplicationRecord
         date = date2
       end
       per_day_count.reject! { |value| value.zero? }
-      ratio = per_day_count.count.zero? ? 0 : per_day_count.map do |value|
+      ratio = per_day_count.map do |value|
         (average * 100) / value
       end.sum / per_day_count.count
       product.update_column(:daily_consumption_ratio, ratio)
