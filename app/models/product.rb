@@ -80,8 +80,9 @@ class Product < ApplicationRecord
     Product.all.each do |product|
       next if product.orders.count.zero?
 
-      oldest_date  = Time.parse(product.product_orders.oldest.limit(1).first.created_at.to_s)
+      # oldest_date  = Time.parse(product.product_orders.oldest.limit(1).first.created_at.to_s)
       now          = Time.parse(DateTime.now.to_s)
+      oldest_date  = now - 42.days
       weeks_count  = (now - oldest_date).seconds.in_weeks.round.abs
       orders_count = product.product_orders.pluck(:quantity).sum # count of all ordered products
       average      = (orders_count / (weeks_count.zero? ? 1 : weeks_count))
@@ -109,8 +110,9 @@ class Product < ApplicationRecord
     Product.all.each do |product|
       next if product.orders.count.zero?
 
-      oldest_date  = Time.parse(product.product_orders.oldest.limit(1).first.created_at.to_s)
+      # oldest_date  = Time.parse(product.product_orders.oldest.limit(1).first.created_at.to_s)
       now          = Time.parse(DateTime.now.to_s)
+      oldest_date  = now - 42.days
       days_count   = (now - oldest_date).seconds.in_days.round.abs
       orders_count = product.product_orders.pluck(:quantity).sum
       average      = (orders_count / (days_count.zero? ? 1 : days_count))

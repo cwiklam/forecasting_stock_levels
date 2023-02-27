@@ -39,7 +39,7 @@ unless electronical_parts
   end
 
   stocks.count.times { |i| Product.create(name: products[i], price: prices[i], availability: stocks[i], max: stocks[i]) }
-  100.times do |i|
+  42.times do |i|
     week                 += 1 if i % 7 == 0
     n                    += 60 if i % 5 == 0
     date                 = DateTime.now - i.days
