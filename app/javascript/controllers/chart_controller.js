@@ -41,8 +41,8 @@ export default class extends Controller {
                         maxArray.push(parseInt(data[key].max))
                         availableArray.push(parseInt(data[key].availability))
                     })
-                    chart.data.datasets[1].data = availableArray
-                    chart.data.datasets[0].data = maxArray
+                    chart.data.datasets[0].data = availableArray
+                    chart.data.datasets[1].data = maxArray
                     chart.data.labels = labelsArray
                     chart.update();
                 })
@@ -90,7 +90,7 @@ export default class extends Controller {
             data: this.data,
             type: 'line',
             options: {
-                color: 'rgb(200, 200, 200)',
+                color: 'rgb(150, 150, 170)',
                 responsive: true,
                 plugins: {
                     legend: {
@@ -98,16 +98,27 @@ export default class extends Controller {
                     },
                     title: {
                         display: true,
-                        text: 'Stany magazynowe'
+                        text: 'Stany magazynowe',
+                        color: 'rgb(170, 170, 190)'
                     }
                 },
                 scales: {
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 15000
+                            max: 15000,
                         }
-                    }]
+                    }],
+                    x: {
+                        ticks: {
+                            color: 'rgb(170, 170, 190)'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: 'rgb(170, 170, 190)'
+                        }
+                    }
                 },
             }
         }
@@ -121,15 +132,6 @@ export default class extends Controller {
             labels: this.labels,
             datasets: [
                 {
-                    label: `Maksymalna pojemność`,
-                    data: metrics1,
-                    fill: false,
-                    borderColor: 'rgb(192, 75, 192)',
-                    color: 'rgb(200, 200, 200)',
-                    backgroundColor: 'rgba(250, 75, 192, 0.5)',
-                    tension: 0.1
-                },
-                {
                     type: 'bar',
                     label: `Dostępne zasoby`,
                     data: metrics2,
@@ -137,6 +139,18 @@ export default class extends Controller {
                     borderColor: 'rgb(75, 192, 192)',
                     backgroundColor: 'rgba(75,192,250, 0.5)',
                     color: 'rgb(200, 200, 200)',
+                    tension: 0.1
+                },
+                {
+                    type: 'bar',
+                    label: `Maksymalna pojemność`,
+                    data: metrics1,
+                    fill: false,
+                    borderColor: 'rgb(192, 75, 192)',
+                    borderWitdh: 10,
+                    pointStyle: 'line',
+                    color: 'rgb(200, 200, 200)',
+                    backgroundColor: 'rgba(250, 75, 192, 0.5)',
                     tension: 0.1
                 }
             ]
