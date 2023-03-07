@@ -58,7 +58,7 @@ export default class extends Controller {
                     yAxisID: 'y',
                     borderColor: 'rgba(255, 255, 255, 0.7)',
                     pointBackgroundColor: 'rgba(255, 255, 255, 0)',
-                    pointBorderColor: 'rgba(255, 255, 255, 0)'
+                    pointBorderColor: 'rgba(255, 255, 255, 0)',
                 }],
                 labels: ['', 'Zasoby', '']
             },
@@ -74,13 +74,22 @@ export default class extends Controller {
 
     get options() {
         const defaultOptions = {
+            color: 'rgb(170, 170, 190)',
             responsive: true,
             maintainAspectRatio: false,
             scales: {
                 y: {
                     id: 'y',
                     min: this.yMin,
-                    max: this.yMax
+                    max: this.yMax,
+                    ticks: {
+                        color: 'rgb(170, 170, 190)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'rgb(170, 170, 190)'
+                    }
                 }
             }
         };
