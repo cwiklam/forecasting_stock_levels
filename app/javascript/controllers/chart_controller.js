@@ -150,7 +150,7 @@ export default class extends Controller {
                     borderWitdh: 10,
                     pointStyle: 'line',
                     color: 'rgb(200, 200, 200)',
-                    backgroundColor: 'rgba(250, 75, 192, 0.5)',
+                    backgroundColor: 'rgba(150, 150, 150, 0.8)',
                     tension: 0.1
                 }
             ]
